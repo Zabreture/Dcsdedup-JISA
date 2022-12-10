@@ -1,0 +1,115 @@
+{
+  "userBTreeSavePath": "./parameter/userBTree.json",
+  "ganache_private_key": [
+    "0a132ac2e7b02f830ae8dded3a981bba81374c98a5dbb87c5b74e4df2c816fc0",
+    "3d85a6c13d1b6b53a7586a8943c605a918a238e75c4db85a2f72f44849d1ddd4",
+    "78d8346a7dabe6d999f8e6653f1e64d4687a06d4284132bc9158c94982a54294",
+    "d6f1d407a81e0fbb12571dad33edd55dff7fbefb5e68d8abc077fbaae329dddb",
+    "5339c99d0a587251a4ed64f85231fcf39ce1e320ea57f51bd1e4b471efac5e7e",
+    "9bed6ba614ce29014d70f322caaf47e82d2117a91f72781f86d509c33455ced6",
+    "0ede48c1db3ae7855a99a091bacb62a251f72fc2cc24ab5cd0a8e490d75f632a",
+    "99b3129dc7d5b6a95d1d56124bf332d86500255edb77723bc5b3ff67a302f167",
+    "92633e30ac3127a6c0f5415dd06f006899cef8515ae713d9a212fd24fe466d1d",
+    "4b95c7354290dc54d506b0f57d0d506a433aa50c5b1375fb3c3fbe955a104e19"
+  ],
+  "rinkeby_private_key": "111",
+  "IPFS_api": "/ip4/127.0.0.1/tcp/5001",
+  "secret_key": "5ee51e8a6bf45a877c1c6deec0a270c7502fdf09dfd15598fdc089692182dd0e",
+  "contract_address": "0x0082Ae8Dd99446C1EbD594544259fb1aC6cA5D42",
+  "initial_vector": "abcdefg123456789",
+  "base_url": "http://8.130.15.53:81",
+  "ganache_url": "http://localhost:7545",
+  "rinkeby_url": "https://rinkeby.infura.io/v3/bb4105854abf435fa1ccceadf7a35b9e",
+  "contract_abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "fileTag",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "head",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "tail",
+          "type": "bytes32"
+        }
+      ],
+      "name": "FIndexPut",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "flag",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "fileTag",
+          "type": "bytes32"
+        }
+      ],
+      "name": "FIndexGet",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "head",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "tail",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "fileTag",
+          "type": "bytes32"
+        }
+      ],
+      "name": "UListGet",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "users",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "fileTag",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "UListPut",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}
