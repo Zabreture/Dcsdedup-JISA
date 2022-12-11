@@ -3,7 +3,7 @@ const utils = require('../src/utils/primitives');
 const service = require('../src/utils/service');
 const args = require('minimist')(process.argv.slice(2));
 const basePath = "E:/TestData/randData/";
-const reps = 20;
+const reps = 10;
 const nameSets = [
     '1MB.bin',
     '2MB.bin', '3MB.bin', '4MB.bin', '5MB.bin',
