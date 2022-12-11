@@ -32,7 +32,7 @@ async function storeFile(filePath, uploadType,systemAccounts) {
             const promise2 = primitives.hash(filePath).then(hashValues => {
                 return primitives.hashSync(hashValues);
             });
-            Promise.all([promise1, promise2], results =>{
+            Promise.all([promise1, promise2]).then( results =>{
                 primitives.encryptSync(fileKey, fileKey);
                 primitives.encryptSync(fileKey, fileKey);
                 primitives.encryptSync(fileKey, fileKey);
@@ -57,9 +57,9 @@ async function retrieveFile(stInfo) {
     const fileInfo = {};
     fileInfo.filePath = filePath;
     fileInfo.currentAccount = user.address;
-    fileInfo.fileTag = Buffer.from(user.fileList[filePath].fileTag,'hex');
-    fileInfo.fileKey = Buffer.from(user.fileList[filePath].fileKey,'hex');
-    fileInfo.addressKey = Buffer.from(user.fileList[filePath].addressKey,'hex');
+    fileInfo.fileTag = crypto.randomBytes(32);
+    fileInfo.fileKey = crypto.randomBytes(32);
+    fileInfo.addressKey = crypto.randomBytes(34);
     return new Promise(resolve => {
         primitives.decrypt(filePath, stInfo.fileKey,filePath + '.enc').then(()=>{
             resolve({

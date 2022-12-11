@@ -1,13 +1,13 @@
 const args = require('minimist')(process.argv.slice(2));
 const {User} = require("./utils/user");
 const service = require('./utils/service');
-const basePath = 'E:\\TestData\\randData\\users\\'
+const basePath = '../../../Datasets/randData/users/'
 
 async function main() {
     process.removeAllListeners('warning');
     const filePath = args['path'];
     const systemAccounts = await service.initialSystem('ganache');
-
+    console.log(systemAccounts);
     switch (args['mode']) {
         case 'upload': {
             // await service.initialFile();
@@ -27,6 +27,8 @@ async function main() {
                 }else{
                     console.log('Subsequent update request.');
                     fileInfo.currentAccount = systemAccounts[1];
+                    console.log(systemAccounts[1]);
+
                     const user = new User(fileInfo.currentAccount);
                     service.subsequentUpdate(fileInfo).then(resInfo => {
                         console.log(resInfo);

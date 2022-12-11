@@ -196,7 +196,7 @@ function FIndexPut(fileTag, random, encAddress, currentAccount){
     const tail = '0x' + encAddress.substr(32,encAddress.length) + '0000000000000000000000000000'
     return new Promise(resolve => {
         contract.methods.FIndexPut(fileTag, head, tail).send({
-            gasLimit: 500000,
+            gasLimit: 800000,
             from: currentAccount,
         }).then(res => {
             resolve(res);
@@ -213,7 +213,7 @@ function UIndexPut(fileTag, currentAccount){
     fileTag = '0x' + fileTag.toString('hex');
     return contract.methods.UListPut(fileTag, currentAccount).send({
         from: currentAccount,
-        gasLimit: 500000,
+        gasLimit: 800000,
     });
 }
 

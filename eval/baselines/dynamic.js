@@ -4,7 +4,7 @@ const crypto = require("crypto");
 const primitives = require("../../src/utils/primitives");
 const args = require("../../src/parameter/args.json");
 const fs = require("fs");
-const basePath = 'E:\\TestData\\randData\\users\\'
+const basePath = '../../../Datasets/randData/users/'
 
 async function storeFile(filePath, uploadType,systemAccounts) {
     const start = new Date().getTime();
@@ -56,9 +56,9 @@ async function retrieveFile(stInfo) {
     const fileInfo = {};
     fileInfo.filePath = filePath;
     fileInfo.currentAccount = user.address;
-    fileInfo.fileTag = Buffer.from(user.fileList[filePath].fileTag,'hex');
-    fileInfo.fileKey = Buffer.from(user.fileList[filePath].fileKey,'hex');
-    fileInfo.addressKey = Buffer.from(user.fileList[filePath].addressKey,'hex');
+    fileInfo.fileTag = crypto.randomBytes(32);
+    fileInfo.fileKey = crypto.randomBytes(32);
+    fileInfo.addressKey = crypto.randomBytes(34);
     return new Promise(async resolve => {
         const encAddress = crypto.randomBytes(34);
         const reEncKey = crypto.randomBytes(32);
