@@ -1,30 +1,8 @@
-// const OPRF = require('oprf')
-// const oprf = new OPRF();
-//
-// async function IPFSCatSync(CID) {
-//     let data = '';
-//     for await (const chunk of ipfs.cat(CID)){
-//         data += chunk;
-//     }
-//     return data;
-// }
-//
-// async function test(){
-//     await oprf.ready;
-//     const input = '11111';
-//     const masked = oprf.maskInput(input);
-//     const secretKey = "5ee51e8a6bf45a877c1c6deec0a270c7502fdf09dfd15598fdc089692182dd0e";
-//     const maskedPoint = masked.point;
-//     const salted = oprf.scalarMult(maskedPoint, Buffer.from(secretKey, 'hex'));
-//     const unmasked = oprf.unmaskPoint(salted, masked.mask);
-//     console.log(unmasked);
-// }
-
 
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const basePath = "E:/TestData/GoLang/";
+const basePath = "E:/TestData/COCO/";
 
 async function getHashes(_path, writePath) {
     let files = [];

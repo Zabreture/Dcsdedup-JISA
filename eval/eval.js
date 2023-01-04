@@ -3,7 +3,7 @@ const utils = require('../src/utils/primitives');
 const service = require('../src/utils/service');
 const args = require('minimist')(process.argv.slice(2));
 const basePath = "E:/TestData/randData/";
-const reps = 10;
+const reps = 20;
 const nameSets = [
     '1MB.bin',
     '2MB.bin', '3MB.bin', '4MB.bin', '5MB.bin',
@@ -67,7 +67,7 @@ async function evaluate(){
 
 async function testOther(account){
     systemAccounts = await service.initialSystem('ganache');
-    let fGetPromises = [],fPutPromises = [],uGetPromises = [],uPutPromises = [];
+    let fGetPromises = [],fPutPromises = [],uGetPromises = [],uPutPromises = [],uRmPromises = [];
     for(let i = 0; i < reps; i ++){
         fGetPromises.push(new Promise(resolve => {
             const start = new Date().getTime();
@@ -88,6 +88,7 @@ async function testOther(account){
         fPutPromises.push(new Promise(resolve => {
             const start = new Date().getTime();
             service.FIndexPutRTT(account).then(res => {
+                // console.log(new Date().getTime() - start);
                 resolve({
                     timeCost: new Date().getTime() - start,
                     gasCost: res.gasUsed,
@@ -97,8 +98,18 @@ async function testOther(account){
         uPutPromises.push(new Promise(resolve => {
             const start = new Date().getTime();
             service.UIndexPutRTT(account).then(res => {
+                const timeCost = new Date().getTime() - start;
+                uRmPromises.push(new Promise(resolve1 => {
+                    const start1 = new Date().getTime();
+                    service.UIndexRmRTT(account).then(res=>{
+                        resolve1({
+                            timeCost: new Date().getTime() - start1,
+                            gasCost: res.gasUsed,
+                        })
+                    })
+                }))
                 resolve({
-                    timeCost: new Date().getTime() - start,
+                    timeCost: timeCost,
                     gasCost: res.gasUsed,
                 })
             })
@@ -130,6 +141,15 @@ async function testOther(account){
     await Promise.all(uPutPromises).then(values => {
         let timeCost = 0, gasCost = 0;
         for (let value of values) {
+            timeCost += value.timeCost;
+            gasCost += value.gasCost;
+        }
+        fs.writeFileSync(otherPath, ''+timeCost/reps+', ',{flag:'a'})
+        fs.writeFileSync(otherPath, ''+gasCost/reps+', ',{flag:'a'})
+    })
+    await Promise.all(uRmPromises).then(values => {
+        let timeCost = 0, gasCost = 0;
+        for(let value of values){
             timeCost += value.timeCost;
             gasCost += value.gasCost;
         }
