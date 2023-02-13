@@ -3,7 +3,7 @@ const utils = require('../src/utils/primitives');
 const service = require('../src/utils/service');
 const args = require('minimist')(process.argv.slice(2));
 const basePath = "E:/TestData/randData/";
-const reps = 20;
+const reps = 1;
 const nameSets = [
     '1MB.bin',
     '2MB.bin', '3MB.bin', '4MB.bin', '5MB.bin',
@@ -33,6 +33,11 @@ async function evaluate(){
         }
         case 'dynamic' : {
             scheme = require('./baselines/dynamic');
+            systemAccounts = await service.initialSystem('ganache');
+            break;
+        }
+        case 'tian' : {
+            scheme = require('./baselines/tian');
             systemAccounts = await service.initialSystem('ganache');
             break;
         }
