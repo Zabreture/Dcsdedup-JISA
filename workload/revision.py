@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from matplotlib import rcParams
 
 
 # %%
@@ -33,22 +34,35 @@ class FileGroup:
             self.add_consumed += 1
 
 
+# %%
+
 def simulation(lamb, mue, days, add_rate, alter_rate):
     file_group = FileGroup()
     cost = []
     for now in range(days):
         file_group.new_users(np.random.poisson(lam=lamb, size=1)[0], mue)
-        print("Day: " + str(now))
-        print(file_group.users)
-        print()
         cost_1, cost_2 = file_group.day_pass()
         cost.append(cost_1 * alter_rate + cost_2 * add_rate)
 
     return range(days), cost
 
 
-x1, y1 = simulation(24, 10, 100, 10, 8)
-x2, y2 = simulation(24, 10, 100, 15, 10)
-plt.plot(x1, y1)
-plt.plot(x2, y2)
+config = {
+    "font.family": 'Times New Roman',
+    "font.size": 18,
+    "mathtext.fontset": 'stix',
+    "font.serif": ['Times New Roman'],
+}
+rcParams.update(config)
+
+x1, y1 = simulation(48, 10, 100, 10, 8)
+x2, y2 = simulation(48, 10, 100, 15, 10)
+# x3, y3 = simulation(48, 10, 100, 45, 30)
+plt.figure(1, [8.5, 6])
+plt.plot(x1, y1, 'b')
+plt.plot(x2, y2, 'r')
+plt.legend(["Dynamic", "Enhanced"])
+plt.xlabel('Time (days)')
+plt.ylabel('Communication Cost (bytes)')
+plt.tight_layout()
 plt.show()
