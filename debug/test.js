@@ -1,45 +1,41 @@
-const Web3 = require("web3");
-const truffleConfig = require("../contract/truffle-config");
-const args = require("../src/parameter/args.json");
+const crypto = require('crypto');
+const reps = 10;
+const service = require('../src/utils/service');
 const userAccount = "0xc81F4b041c636D58cc91482B7023f29195aF835C";
 
 async function test() {
-    console.log("----------------------");
-    console.log("System initializing ...");
+    await service.initialSystem('ganache');
+    let time = 0;
+    for(let i=0;i<reps;i++){
+        const start = Date.now();
+        await service.FIndexGetRTT();
+        time += Date.now() - start;
+    }
+    console.log('FIndexGet: ' + time / reps);
 
-    web3 = new Web3(new Web3.providers.HttpProvider(
-        'http://' + truffleConfig.networks.development.host
-        + ':' + truffleConfig.networks.development.port
-    ));
+    time = 0;
+    for(let i=0;i<reps;i++){
+        const start = Date.now();
+        await service.FIndexPutRTT(userAccount);
+        time += Date.now() - start;
+    }
+    console.log('FIndexPut: ' + time / reps);
 
-    let test_contract = new web3.eth.Contract(
-        args.test_abi,
-        args.test_address
-    );
+    time = 0;
+    for(let i=0;i<reps;i++){
+        const start = Date.now();
+        await service.UIndexGetRTT();
+        time += Date.now() - start;
+    }
+    console.log('UIndexGet: ' + time / reps);
 
-    const start = Date.now();
-    console.log(start);
-
-    test_contract.events.record({
-        filter:{},
-        fromBlock: 'latest'
-    }, (error, event) => {
-        let cost = Date.now() - start;
-        console.log('Event time: ' + cost);
-        console.log(event);
-    })
-
-    test_contract.methods.add_pure(100, 100).send({
-            from: userAccount,
-        }
-    ).then(res => {
-        let cost = Date.now() - start;
-        console.log('Then time: ' + cost);
-        console.log('Send');
-        console.log(res.gasUsed);
-
-    })
-
+    time = 0;
+    for(let i=0;i<reps;i++){
+        const start = Date.now();
+        await service.UIndexPutRTT(userAccount);
+        time += Date.now() - start;
+    }
+    console.log('UIndexPut: ' + time / reps);
 
 }
 

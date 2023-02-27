@@ -57,9 +57,9 @@ async function retrieveFile(stInfo) {
     const fileInfo = {};
     fileInfo.filePath = filePath;
     fileInfo.currentAccount = user.address;
-    fileInfo.fileTag = Buffer.from(user.fileList[filePath].fileTag,'hex');
-    fileInfo.fileKey = Buffer.from(user.fileList[filePath].fileKey,'hex');
-    fileInfo.addressKey = Buffer.from(user.fileList[filePath].addressKey,'hex');
+    // fileInfo.fileTag = Buffer.from(user.fileList[filePath].fileTag,'hex');
+    // fileInfo.fileKey = Buffer.from(user.fileList[filePath].fileKey,'hex');
+    // fileInfo.addressKey = Buffer.from(user.fileList[filePath].addressKey,'hex');
     return new Promise(resolve => {
         primitives.decrypt(filePath, stInfo.fileKey,filePath + '.enc').then(()=>{
             resolve({
