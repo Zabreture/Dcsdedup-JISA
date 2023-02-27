@@ -21,7 +21,7 @@ async function storeFile(filePath, uploadType,systemAccounts) {
                     fileKey: fileKey,
                     filePath: filePath,
                     timeCost: new Date().getTime() - start,
-                    systemAccounts: systemAccounts,
+                    // systemAccounts: systemAccounts,
                 });
             })
         })
@@ -32,7 +32,7 @@ async function storeFile(filePath, uploadType,systemAccounts) {
             const promise2 = primitives.hash(filePath).then(hashValues => {
                 return primitives.hashSync(hashValues);
             });
-            Promise.all([promise1, promise2]).then( results =>{
+            Promise.all([promise1, promise2]).then(results =>{
                 primitives.encryptSync(fileKey, fileKey);
                 primitives.encryptSync(fileKey, fileKey);
                 primitives.encryptSync(fileKey, fileKey);
@@ -42,7 +42,7 @@ async function storeFile(filePath, uploadType,systemAccounts) {
                     fileKey: fileKey,
                     filePath: filePath,
                     timeCost: new Date().getTime() - start,
-                    systemAccounts: systemAccounts,
+                    // systemAccounts: systemAccounts,
                 });
             })
         })
@@ -53,13 +53,10 @@ async function storeFile(filePath, uploadType,systemAccounts) {
 async function retrieveFile(stInfo) {
     const filePath = stInfo.filePath;
     const start = new Date().getTime();
-    const user = new User(stInfo.systemAccounts[0]);
-    const fileInfo = {};
-    fileInfo.filePath = filePath;
-    fileInfo.currentAccount = user.address;
-    fileInfo.fileTag = crypto.randomBytes(32);
-    fileInfo.fileKey = crypto.randomBytes(32);
-    fileInfo.addressKey = crypto.randomBytes(34);
+    // const user = new User(stInfo.systemAccounts[0]);
+    // const fileInfo = {};
+    // fileInfo.filePath = filePath;
+    // fileInfo.currentAccount = user.address;
     return new Promise(resolve => {
         primitives.decrypt(filePath, stInfo.fileKey,filePath + '.enc').then(()=>{
             resolve({

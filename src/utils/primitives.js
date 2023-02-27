@@ -61,7 +61,7 @@ function hashSync(data) {
 
 
 function ConvergentEncryption(filePath) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         hash(filePath).then(fileKay => {
             const cipherPath = filePath + '.enc';
             encrypt(filePath, fileKay, cipherPath).then(() => {

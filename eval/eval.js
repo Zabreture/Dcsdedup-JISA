@@ -3,15 +3,10 @@ const crypto = require('crypto');
 const basePath = "../../../Datasets/randData/";
 const service = require('../src/utils/service');
 const primitives = require('../src/utils/primitives');
-const {file} = require("truffle/build/2478.bundled");
 const args = require('minimist')(process.argv.slice(2));
-const reps = 10;
+const reps = 100;
 const nameSets = [
-    '1MB.bin',
-    '2MB.bin', '3MB.bin', '4MB.bin', '5MB.bin',
-    '6MB.bin', '7MB.bin', '8MB.bin', '9MB.bin', '10MB.bin',
-    // '11MB.bin', '12MB.bin', '13MB.bin','14MB.bin', '15MB.bin',
-    // '16MB.bin'
+    '2MB.bin', '4MB.bin', '6MB.bin',  '8MB.bin', '10MB.bin'
 ]
 const storePath = './eval/store.csv';
 const retrievePath = './eval/retrieve.csv';
@@ -26,18 +21,22 @@ async function evaluate(){
         case 'mle' : scheme = require('./baselines/mle');break;
         case 'enhanced' : {
             scheme = require('./baselines/enhanced');
-            await service.initialSystem('ganache');
+            // await service.initialSystem('ganache');
             break;
         }
         case 'hur' : {
             scheme = require('./baselines/hur');
-            systemAccounts = await service.initialSystem('ganache');
-            console.log('test');
+            // systemAccounts = await service.initialSystem('ganache');
             break;
         }
         case 'dynamic' : {
             scheme = require('./baselines/dynamic');
-            systemAccounts = await service.initialSystem('ganache');
+            // systemAccounts = await service.initialSystem('ganache');
+            break;
+        }
+        case 'tian' : {
+            scheme = require('./baselines/tian');
+            // systemAccounts = await service.initialSystem('ganache');
             break;
         }
         case 'other' : {
@@ -48,21 +47,24 @@ async function evaluate(){
     if(args['mode'] === 'other'){
         return;
     }
-    await warmUp();
     fs.writeFileSync(storePath, '\n'+args['mode']+ args['type']+',',{flag:'a'});
     fs.writeFileSync(retrievePath, '\n'+args['mode']+args['type']+',',{flag:'a'});
 
     for(const filename of nameSets){
         console.log('Testing ' + filename + ' ...');
         const filePath = basePath + filename;
-        let storeTime = 0, retTime = 0, gasUsed = 0;
+        let storeTime = 0, retTime = 0;
+        let stInfo,retInfo;
+        warmUp();
         for(let rep = 0; rep < reps; rep ++){
-            await scheme.storeFile(filePath,uploadType,systemAccounts).then(async stInfo => {
-                retInfo = await scheme.retrieveFile(stInfo);
-                storeTime += stInfo.timeCost;
-                retTime += retInfo.timeCost;
-
-            })
+            stInfo = await scheme.storeFile(filePath,uploadType,systemAccounts);
+            storeTime += stInfo.timeCost;
+        }
+        warmUp();
+        for(let rep = 0; rep < reps; rep ++){
+            retInfo = await scheme.retrieveFile(stInfo);
+            // console.log(retInfo);
+            retTime += retInfo.timeCost;
         }
         fs.writeFileSync(storePath, storeTime/reps+',',{flag:'a'})
         fs.writeFileSync(retrievePath, retTime/reps+',',{flag:'a'})
@@ -177,13 +179,7 @@ async function testOther(account){
 }
 
 async function warmUp(){
-    const filePath = basePath + nameSets[5];
-    for(let i = 0; i< 10;i++){
-        const scheme = require('./baselines/mle');
-        await scheme.storeFile(filePath);
-
-
-    }
+    setTimeout(()=>{}, 1000)
 }
 
 evaluate();

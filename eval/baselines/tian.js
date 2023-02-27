@@ -1,7 +1,7 @@
 const utils = require('../../src/utils/primitives');
-const service = require('../../src/utils/service');
+const nodeRSA = require('node-rsa');
+const rsaKey = new nodeRSA({b:512});
 const crypto = require('crypto');
-const userAccount = "0xc81F4b041c636D58cc91482B7023f29195aF835C";
 
 
 async function storeFile(filePath, uploadType) {
@@ -9,27 +9,22 @@ async function storeFile(filePath, uploadType) {
     const fileKey = await utils.hash(filePath);
     const cipherPath = filePath + '.enc';
     await utils.encrypt(filePath, fileKey, cipherPath);
-    const fileTag = await utils.hash(cipherPath);
+    const fileTag_1 = await crypto.randomBytes(32);
+    const encryptedTag = rsaKey.encrypt(fileKey);
     if(uploadType === 'IU'){
-        const fileID = crypto.randomBytes(32);
-        const random = crypto.randomBytes(16);
-        const addressKey = await utils.hash(cipherPath, random);
-        const encAddress = utils.encryptSync(fileID, addressKey);
+        utils.hashSync(fileTag_1);
         return {
             filePath: filePath,
-            fileID: fileID,
-            fileKey: fileKey,
-            encAddress: encAddress,
+            fileTag: encryptedTag,
+            // fileID: fileID,
             timeCost: new Date().getTime() - start
         }
     }else{
-        const addressKey = await utils.hash(cipherPath, crypto.randomBytes(16));
-        const fileID = await utils.decryptSync(crypto.randomBytes(34), addressKey);
+        await utils.hash(filePath);
+        utils.hashSync(fileKey);
         return {
             filePath: filePath,
-            // flag: true,
-            // fileID: fileID,
-            fileKey: fileKey,
+            fileTag: encryptedTag,
             timeCost: new Date().getTime() - start
         }
     }
@@ -38,7 +33,8 @@ async function storeFile(filePath, uploadType) {
 async function retrieveFile(stInfo) {
     const start = new Date().getTime();
     const retPath = stInfo.filePath + '.ret.bin';
-    await utils.decrypt(stInfo.filePath + '.enc', stInfo.fileKey, retPath);
+    const fileKey = rsaKey.decrypt(stInfo.fileTag)
+    await utils.decrypt(stInfo.filePath + '.enc', fileKey, retPath);
     return {
         retPath: retPath,
         timeCost: new Date().getTime() - start
