@@ -34,7 +34,7 @@ async function initialSystem(mode) {
 
 function initialFile(){
     const bytes = crypto.randomBytes(32);
-    fs.writeFile('E:/TestData/randData/test.txt', bytes, () => {});
+    fs.writeFileSync('E:/TestData/randData/1MB.bin', bytes,'binary');
 }
 
 // Deduplication service
@@ -50,10 +50,13 @@ function dedupCheck(fileTag) {
 function localEncryption(filePath) {
     return new Promise((resolve) => {
         primitives.ConvergentEncryption(filePath).then(encRes => {
-            resolve({
-                filePath: filePath,
-                fileKey: encRes.fileKey,
-                fileTag: encRes.fileTag,
+            dedupCheck(encRes.fileTag).then((fIndexRes)=> {
+                resolve({
+                    filePath: filePath,
+                    fileKey: encRes.fileKey,
+                    fileTag: encRes.fileTag,
+                    isInitial: fIndexRes.isInitial,
+                })
             })
         });
     })
@@ -62,14 +65,17 @@ function localEncryption(filePath) {
 function initialUpload(info){
     const filePath = info.filePath;
     const random = crypto.randomBytes(16);
-    const promise1 = Promise.resolve(90);
+    const promise1 = IPFSAdd(filePath + '.enc');
     const promise2 = primitives.hash(filePath + '.enc', random);
     return Promise.all([promise1, promise2]).then(value => {
-        const encAddress = primitives.encryptSync(crypto.randomBytes(34), value[1]);
+        const encAddress = primitives.encryptSync(value[0], value[1]);
         const promise3 = FIndexPut(info.fileTag, random, encAddress, info.currentAccount);
         const promise4 = UIndexPut(info.fileTag, info.currentAccount);
         return Promise.all([promise3, promise4]).then(res => {
             info.addressKey = value[1].toString('hex');
+            info.fIndexGasUsed = res[0].gasUsed;
+            info.uIndexGasUsed = res[1].gasUsed;
+            fs.unlinkSync(filePath + '.enc');
             return info;
         })
     })
@@ -281,6 +287,14 @@ async function UIndexPutRTT(currentAccount){
     });
 }
 
+async function UIndexRmRTT(currentAccount){
+    const fileTag = '0x0000000000000000000000000000000000000000000000000000000000000001';
+    return contract.methods.UListRm(fileTag, currentAccount).send({
+        gasLimit: 500000,
+        from: currentAccount,
+    });
+}
+
 // IPFS
 const ipfsClient = require('ipfs-http-client');
 const fs = require("fs");
@@ -332,5 +346,6 @@ module.exports = {
     FIndexGetRTT,
     UIndexPutRTT,
     UIndexGetRTT,
+    UIndexRmRTT,
     retrieve,
 }

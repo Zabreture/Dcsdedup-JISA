@@ -1,1 +1,156 @@
-{"val":"b7501fee876c03dd763709a4df3641fa6f509ef7cd166db3180e34577036ca5e","left":{"val":"45d0e8afac0473217abcbae9c435eb26e3e3aa795db0c4e8e73a1cc44449f963","left":{"val":"554306d25140cd550c9326600a99af77f919639349ccb7581d658dfb3d628cbe","left":{"val":"8bdcbe10c407ac197686a5721d9065cceb1d6c2d63c91c37e05c12233c0292c3","left":{"val":"a314a65d89465994db8860d5d6b74a97d04c32d39b9079b19a3c16ae1b79512f","left":null,"right":null,"father":null},"right":{"val":"fbb70da8018932f536ae8958cc0a3d80bc3d1f7a4a10cdf17620d811bb7c4ef9","left":null,"right":null,"father":null},"father":null},"right":{"val":"0302ce71b67a29d627d9553a4af93439c1fc6aad918e02b1a131ed2d2b6d4154","left":{"val":"5b41ea8fa9d2850cd720503882bd3156fa5d9fd49e597b0d7de298b38ac38cd6","left":null,"right":null,"father":null},"right":{"val":"6b11b3106b6e39ec84eebc51b302f3df078f586654de17358092f391045f20f8","left":null,"right":null,"father":null},"father":null},"father":null},"right":{"val":"d6d0a0450b00a0ad2e23afe44563b585c7a259a3ea0ce32f8b309464b14674cf","left":{"val":"446cdd5783d99c2b5ae00060f7b7900367713a163e7c8d490a10f1d13785a4bf","left":{"val":"d5ea3c6b7ae61e403e3b4286e33d09729a57c99f31e58f28f5c9729fb5b22f64","left":null,"right":null,"father":null},"right":{"val":"befa53799f3108c083ebd9241e8c4d0d2a87c153b7b2f349bc70e71bc572773b","left":null,"right":null,"father":null},"father":null},"right":{"val":"eca13f09fa589e405ad50e8896b6e2da29463ab5b78616600f335061259781b7","left":{"val":"a92b6ee7296f112d60a8813af7d2f19f32e5cef21a6b6d1b2ef16a9c231d2b90","left":null,"right":null,"father":null},"right":{"val":"a0ba7e8d2e6f3ebcf10d640ed70259c190a4b129b421e5c09abc2c3ff2861518","left":null,"right":null,"father":null},"father":null},"father":null},"father":null},"right":{"val":"e948f10fa4af5d1783e9064fb1594588fdc0c12f9c352efa3046f6d05e098cd1","left":{"val":"23a0b0c22d1ca1bc465929432a63033b87352546f50d31dda7154307ad493ac7","left":{"val":"20b77c6f634915fbb1d7b8c8ffc42712895fe6f114002600eba34bbda1ae08f6","left":{"val":"9e357cdd397944936fe0ab3aaccb0ba36aae35b71778031095aec238c35df34f","left":null,"right":null,"father":null},"right":{"val":"67b8d5dc955087f7dcf0dd4c2fcf6b22277b8f79e8bdaac9a558465ea8e19e0c","left":null,"right":null,"father":null},"father":null},"right":{"val":"2287a28ad4c886f000cc42acb1d9a9291fdfc053ad45d79859788559e68b070c","left":{"val":"ab0671388ff9774873b97e816fe922c9dfc4735309c2e3bf3f8747901106ffa9","left":null,"right":null,"father":null},"right":{"val":"e3e0a2f0bc26ea414cb4f9b46bbe40321202e0f6c59eeb5afe7e2c3fe2273154","left":null,"right":null,"father":null},"father":null},"father":null},"right":{"val":"8c1db3bd888d3fc021a3e48f63137ac2127b6059a4bee6d83af1ffefe49c659b","left":{"val":"f29b8a022d256c8a53b55c3acbf6801f2f48813d000dbaba46b2bb6322d4829e","left":{"val":"28151f22b74e57741f0b9b29fdb6efb64d0cfe8f1ed380d906e2a336ee9335b1","left":null,"right":null,"father":null},"right":{"val":"42bce9ceff4b5ea2622046b1db090c443ec993fe1abf0a3bcabc29e6cade3fc8","left":null,"right":null,"father":null},"father":null},"right":{"val":"e4888fb20a9c4855016f85e9665b49edbcaa51ea4c7ddf6d66a424fed029fb46","left":{"val":"f5aa00c46ef65f0df64b3596a9637f64a6789df232079ff2e13ce571b1ed2b55","left":null,"right":null,"father":null},"right":{"val":"01aab09cef648d2f2440cf9f196035215ff36b2181a4f86e02ef26f687415a4d","left":null,"right":null,"father":null},"father":null},"father":null},"father":null},"father":null}
+{
+  "val": "b7501fee876c03dd763709a4df3641fa6f509ef7cd166db3180e34577036ca5e",
+  "left": {
+    "val": "45d0e8afac0473217abcbae9c435eb26e3e3aa795db0c4e8e73a1cc44449f963",
+    "left": {
+      "val": "554306d25140cd550c9326600a99af77f919639349ccb7581d658dfb3d628cbe",
+      "left": {
+        "val": "8bdcbe10c407ac197686a5721d9065cceb1d6c2d63c91c37e05c12233c0292c3",
+        "left": {
+          "val": "a314a65d89465994db8860d5d6b74a97d04c32d39b9079b19a3c16ae1b79512f",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "right": {
+          "val": "fbb70da8018932f536ae8958cc0a3d80bc3d1f7a4a10cdf17620d811bb7c4ef9",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "father": null
+      },
+      "right": {
+        "val": "0302ce71b67a29d627d9553a4af93439c1fc6aad918e02b1a131ed2d2b6d4154",
+        "left": {
+          "val": "5b41ea8fa9d2850cd720503882bd3156fa5d9fd49e597b0d7de298b38ac38cd6",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "right": {
+          "val": "6b11b3106b6e39ec84eebc51b302f3df078f586654de17358092f391045f20f8",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "father": null
+      },
+      "father": null
+    },
+    "right": {
+      "val": "d6d0a0450b00a0ad2e23afe44563b585c7a259a3ea0ce32f8b309464b14674cf",
+      "left": {
+        "val": "446cdd5783d99c2b5ae00060f7b7900367713a163e7c8d490a10f1d13785a4bf",
+        "left": {
+          "val": "d5ea3c6b7ae61e403e3b4286e33d09729a57c99f31e58f28f5c9729fb5b22f64",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "right": {
+          "val": "befa53799f3108c083ebd9241e8c4d0d2a87c153b7b2f349bc70e71bc572773b",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "father": null
+      },
+      "right": {
+        "val": "eca13f09fa589e405ad50e8896b6e2da29463ab5b78616600f335061259781b7",
+        "left": {
+          "val": "a92b6ee7296f112d60a8813af7d2f19f32e5cef21a6b6d1b2ef16a9c231d2b90",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "right": {
+          "val": "a0ba7e8d2e6f3ebcf10d640ed70259c190a4b129b421e5c09abc2c3ff2861518",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "father": null
+      },
+      "father": null
+    },
+    "father": null
+  },
+  "right": {
+    "val": "e948f10fa4af5d1783e9064fb1594588fdc0c12f9c352efa3046f6d05e098cd1",
+    "left": {
+      "val": "23a0b0c22d1ca1bc465929432a63033b87352546f50d31dda7154307ad493ac7",
+      "left": {
+        "val": "20b77c6f634915fbb1d7b8c8ffc42712895fe6f114002600eba34bbda1ae08f6",
+        "left": {
+          "val": "9e357cdd397944936fe0ab3aaccb0ba36aae35b71778031095aec238c35df34f",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "right": {
+          "val": "67b8d5dc955087f7dcf0dd4c2fcf6b22277b8f79e8bdaac9a558465ea8e19e0c",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "father": null
+      },
+      "right": {
+        "val": "2287a28ad4c886f000cc42acb1d9a9291fdfc053ad45d79859788559e68b070c",
+        "left": {
+          "val": "ab0671388ff9774873b97e816fe922c9dfc4735309c2e3bf3f8747901106ffa9",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "right": {
+          "val": "e3e0a2f0bc26ea414cb4f9b46bbe40321202e0f6c59eeb5afe7e2c3fe2273154",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "father": null
+      },
+      "father": null
+    },
+    "right": {
+      "val": "8c1db3bd888d3fc021a3e48f63137ac2127b6059a4bee6d83af1ffefe49c659b",
+      "left": {
+        "val": "f29b8a022d256c8a53b55c3acbf6801f2f48813d000dbaba46b2bb6322d4829e",
+        "left": {
+          "val": "28151f22b74e57741f0b9b29fdb6efb64d0cfe8f1ed380d906e2a336ee9335b1",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "right": {
+          "val": "42bce9ceff4b5ea2622046b1db090c443ec993fe1abf0a3bcabc29e6cade3fc8",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "father": null
+      },
+      "right": {
+        "val": "e4888fb20a9c4855016f85e9665b49edbcaa51ea4c7ddf6d66a424fed029fb46",
+        "left": {
+          "val": "f5aa00c46ef65f0df64b3596a9637f64a6789df232079ff2e13ce571b1ed2b55",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "right": {
+          "val": "01aab09cef648d2f2440cf9f196035215ff36b2181a4f86e02ef26f687415a4d",
+          "left": null,
+          "right": null,
+          "father": null
+        },
+        "father": null
+      },
+      "father": null
+    },
+    "father": null
+  },
+  "father": null
+}

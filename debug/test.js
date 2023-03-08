@@ -1,37 +1,42 @@
+const crypto = require('crypto');
+const reps = 10;
 const service = require('../src/utils/service');
-const {UserBTree} =  require('../src/utils/userBTree');
-const {User} = require('../src/utils/user');
-const fs = require("fs");
-const primitive = require('../src/utils/primitives');
+const userAccount = "0xc81F4b041c636D58cc91482B7023f29195aF835C";
 
 async function test() {
-    // process.removeAllListeners('warning');
-    // await service.initialSystem('ganache');
-    // const Web3 = require('web3');
-    // const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
-    // web3.eth.getAccounts().then(userList => {
-    //     // const userBTree = new UserBTree(userList);
-    //     // const userGroup = userList;
-    //     // userBTree.getGroupKeys(userGroup).then(async res => {
-    //     //     console.log(res);
-    //     //     await userBTree.printTree()
-    //     //     console.log(await userBTree.getUsedKey(userGroup[2], userGroup));
-    //     // })
-    //     const userAddress = userList[0];
-    //     const user = new User(userAddress);
-    //     user.addFile('E:\\TestData\\randData\\test.txt', {
-    //         fileTag: 'tag', fileKey: 'key', addressKey: 'addrKey'
-    //     });
-    //     user.addFile('E:\\TestData\\randData\\test1.txt', {
-    //         fileTag: 'tag', fileKey: 'key', addressKey: 'addrKey'
-    //     });
-    //     user.toJson('E:\\TestData\\randData\\users\\'+userAddress+'.json');
-    //     const user_ = new User(userAddress);
-    //     console.log(user_);
-    // })
-    // const str = '';
-    // console.log(str);
-    const saveStream = fs.createWriteStream('E:/TestData/randData/')
+    await service.initialSystem('ganache');
+    let time = 0;
+    for(let i=0;i<reps;i++){
+        const start = Date.now();
+        await service.FIndexGetRTT();
+        time += Date.now() - start;
+    }
+    console.log('FIndexGet: ' + time / reps);
+
+    time = 0;
+    for(let i=0;i<reps;i++){
+        const start = Date.now();
+        await service.FIndexPutRTT(userAccount);
+        time += Date.now() - start;
+    }
+    console.log('FIndexPut: ' + time / reps);
+
+    time = 0;
+    for(let i=0;i<reps;i++){
+        const start = Date.now();
+        await service.UIndexGetRTT();
+        time += Date.now() - start;
+    }
+    console.log('UIndexGet: ' + time / reps);
+
+    time = 0;
+    for(let i=0;i<reps;i++){
+        const start = Date.now();
+        await service.UIndexPutRTT(userAccount);
+        time += Date.now() - start;
+    }
+    console.log('UIndexPut: ' + time / reps);
+
 }
 
 test();

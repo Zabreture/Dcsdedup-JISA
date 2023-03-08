@@ -6,7 +6,15 @@ const primitives = require('../src/utils/primitives');
 const args = require('minimist')(process.argv.slice(2));
 const reps = 100;
 const nameSets = [
+<<<<<<< HEAD
     '2MB.bin', '4MB.bin', '6MB.bin',  '8MB.bin', '10MB.bin'
+=======
+    // '1MB.bin',
+    '2MB.bin', '4MB.bin', '6MB.bin', '8MB.bin','10MB.bin',
+    // '6MB.bin', '7MB.bin', '8MB.bin', '9MB.bin',
+    // '11MB.bin', '12MB.bin', '13MB.bin','14MB.bin', '15MB.bin',
+    // '16MB.bin'
+>>>>>>> 6d704e795ba223f61ca9290f7bfe8771164896a0
 ]
 const storePath = './eval/store.csv';
 const retrievePath = './eval/retrieve.csv';
@@ -37,6 +45,11 @@ async function evaluate(){
         case 'tian' : {
             scheme = require('./baselines/tian');
             // systemAccounts = await service.initialSystem('ganache');
+            break;
+        }
+        case 'tian' : {
+            scheme = require('./baselines/tian');
+            systemAccounts = await service.initialSystem('ganache');
             break;
         }
         case 'other' : {
@@ -73,6 +86,7 @@ async function evaluate(){
 
 async function testOther(account){
     systemAccounts = await service.initialSystem('ganache');
+<<<<<<< HEAD
     // let fGetPromises = [],fPutPromises = [],uGetPromises = [],uPutPromises = [];
     // for(let i = 0; i < reps; i ++){
     //     fGetPromises.push(new Promise(resolve => {
@@ -143,6 +157,98 @@ async function testOther(account){
     //     fs.writeFileSync(otherPath, ''+gasCost/reps+', ',{flag:'a'})
     // })
     const filePath = basePath + '100MB.bin';
+=======
+    let fGetPromises = [],fPutPromises = [],uGetPromises = [],uPutPromises = [],uRmPromises = [];
+    for(let i = 0; i < reps; i ++){
+        fGetPromises.push(new Promise(resolve => {
+            const start = new Date().getTime();
+            service.FIndexGetRTT().then(res => {
+                resolve({
+                    timeCost: new Date().getTime() - start,
+                })
+            })
+        }));
+        uGetPromises.push(new Promise(resolve => {
+            const start = new Date().getTime();
+            service.UIndexGetRTT().then(res => {
+                resolve({
+                    timeCost: new Date().getTime() - start,
+                })
+            })
+        }));
+        fPutPromises.push(new Promise(resolve => {
+            const start = new Date().getTime();
+            service.FIndexPutRTT(account).then(res => {
+                // console.log(new Date().getTime() - start);
+                resolve({
+                    timeCost: new Date().getTime() - start,
+                    gasCost: res.gasUsed,
+                })
+            })
+        }));
+        uPutPromises.push(new Promise(resolve => {
+            const start = new Date().getTime();
+            service.UIndexPutRTT(account).then(res => {
+                const timeCost = new Date().getTime() - start;
+                uRmPromises.push(new Promise(resolve1 => {
+                    const start1 = new Date().getTime();
+                    service.UIndexRmRTT(account).then(res=>{
+                        resolve1({
+                            timeCost: new Date().getTime() - start1,
+                            gasCost: res.gasUsed,
+                        })
+                    })
+                }))
+                resolve({
+                    timeCost: timeCost,
+                    gasCost: res.gasUsed,
+                })
+            })
+        }));
+    }
+    await Promise.all(fGetPromises).then(values => {
+        let timeCost = 0, gasCost = 0;
+        for (let value of values) {
+            timeCost += value.timeCost;
+        }
+        fs.writeFileSync(otherPath, '\n'+timeCost/reps+', ',{flag:'a'})
+    })
+    await Promise.all(fPutPromises).then(values => {
+        let timeCost = 0, gasCost = 0;
+        for (let value of values) {
+            timeCost += value.timeCost;
+            gasCost += value.gasCost;
+        }
+        fs.writeFileSync(otherPath, ''+timeCost/reps+', ',{flag:'a'})
+        fs.writeFileSync(otherPath, ''+gasCost/reps+', ',{flag:'a'})
+    })
+    await Promise.all(uGetPromises).then(values => {
+        let timeCost = 0, gasCost = 0;
+        for (let value of values) {
+            timeCost += value.timeCost;
+        }
+        fs.writeFileSync(otherPath, ''+timeCost/reps+', ',{flag:'a'})
+    })
+    await Promise.all(uPutPromises).then(values => {
+        let timeCost = 0, gasCost = 0;
+        for (let value of values) {
+            timeCost += value.timeCost;
+            gasCost += value.gasCost;
+        }
+        fs.writeFileSync(otherPath, ''+timeCost/reps+', ',{flag:'a'})
+        fs.writeFileSync(otherPath, ''+gasCost/reps+', ',{flag:'a'})
+    })
+    await Promise.all(uRmPromises).then(values => {
+        let timeCost = 0, gasCost = 0;
+        for(let value of values){
+            timeCost += value.timeCost;
+            gasCost += value.gasCost;
+        }
+        fs.writeFileSync(otherPath, ''+timeCost/reps+', ',{flag:'a'})
+        fs.writeFileSync(otherPath, ''+gasCost/reps+', ',{flag:'a'})
+    })
+}
+>>>>>>> 6d704e795ba223f61ca9290f7bfe8771164896a0
 
     let timeCost1=0,timeCost2=0,timeCost3=0,timeCost4=0,timeCost5=0;
     for(let i=0;i<reps;i++){

@@ -53,10 +53,20 @@ async function storeFile(filePath, uploadType,systemAccounts) {
 async function retrieveFile(stInfo) {
     const filePath = stInfo.filePath;
     const start = new Date().getTime();
+<<<<<<< HEAD
     // const user = new User(stInfo.systemAccounts[0]);
     // const fileInfo = {};
     // fileInfo.filePath = filePath;
     // fileInfo.currentAccount = user.address;
+=======
+    const user = new User(stInfo.systemAccounts[0]);
+    const fileInfo = {};
+    fileInfo.filePath = filePath;
+    fileInfo.currentAccount = user.address;
+    // fileInfo.fileTag = Buffer.from(user.fileList[filePath].fileTag,'hex');
+    // fileInfo.fileKey = Buffer.from(user.fileList[filePath].fileKey,'hex');
+    // fileInfo.addressKey = Buffer.from(user.fileList[filePath].addressKey,'hex');
+>>>>>>> 6d704e795ba223f61ca9290f7bfe8771164896a0
     return new Promise(resolve => {
         primitives.decrypt(filePath, stInfo.fileKey,filePath + '.enc').then(()=>{
             resolve({

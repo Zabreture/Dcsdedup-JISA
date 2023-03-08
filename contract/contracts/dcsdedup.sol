@@ -37,4 +37,12 @@ contract dcsdedup {
     function UListPut(bytes32 fileTag, address owner) public {
         UList[fileTag].push(owner);
     }
+
+    function UListRm(bytes32 fileTag, address owner) public {
+        for (uint i = 0; i<UList[fileTag].length; i++){
+            if(UList[fileTag][i] == owner){
+                delete UList[fileTag][i];
+            }
+        }
+    }
 }

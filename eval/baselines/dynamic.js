@@ -15,9 +15,26 @@ async function storeFile(filePath, uploadType,systemAccounts) {
     const fileKey = await primitives.hash(filePath);
     await primitives.encrypt(filePath, fileKey, filePath + '.enc');
     const fileTag = await primitives.hash(filePath + '.enc');
+<<<<<<< HEAD
     if (uploadType === 'IU') {
         const promise1 = primitives.encrypt(filePath + '.enc', reEncKey, filePath + '.re');
         const promise2 = primitives.hash(filePath + '.enc', random);
+=======
+    // const fileInfo = await service.localEncryption(filePath);
+    // fileInfo.systemAccounts = systemAccounts;
+    // await service.FIndexGet(fileInfo.fileTag);
+    if (uploadType === 'IU') {
+        // if(fileInfo.isInitial){
+        // fileInfo.currentAccount = systemAccounts[0];
+        const promise1 = primitives.encrypt(filePath + '.enc', reEncKey, filePath + '.re');
+        const promise2 = primitives.hash(filePath + '.enc', random);
+        // await primitives.encrypt(filePath + '.enc', reEncKey, filePath + '.re');
+        // const addressKey = await primitives.hash(filePath + '.enc', random);
+        // service.initialUpload(fileInfo).then(retInfo => {
+        //     user.addFile(filePath, resInfo);
+        //     user.toJson(basePath + user.address + '.json');
+        // })
+>>>>>>> 6d704e795ba223f61ca9290f7bfe8771164896a0
         const results = await Promise.all([promise1, promise2]);
         const addressKey = results[1];
         primitives.encryptSync(crypto.randomBytes(32), addressKey);
@@ -27,13 +44,24 @@ async function storeFile(filePath, uploadType,systemAccounts) {
             reEncKey: reEncKey,
             uploadType: uploadType,
             fileKey: fileKey,
+<<<<<<< HEAD
         })
     } else {
+=======
+            // systemAccounts: systemAccounts,
+        })
+    } else {
+        // fileInfo.currentAccount = systemAccounts[1];
+>>>>>>> 6d704e795ba223f61ca9290f7bfe8771164896a0
         const promise1 = primitives.decrypt(
             filePath + '.re',
             reEncKey,
             filePath + '.re.dec').then(async () => {
             const testTag = await primitives.hash(filePath + '.re.dec');
+<<<<<<< HEAD
+=======
+            // console.log(testTag.toString('hex') === fileInfo.fileTag.toString('hex'));
+>>>>>>> 6d704e795ba223f61ca9290f7bfe8771164896a0
         })
         const promise2 = primitives.encrypt(filePath + '.enc', reEncKey, filePath + '.re2')
         const results = await Promise.all([promise1, promise2]);

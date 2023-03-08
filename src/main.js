@@ -45,12 +45,10 @@ async function main() {
             const fileInfo = {};
             fileInfo.filePath = filePath;
             fileInfo.currentAccount = user.address;
-            console.log(user.fileList);
-            console.log(filePath);
             fileInfo.fileTag = Buffer.from(user.fileList[filePath].fileTag,'hex');
             fileInfo.fileKey = Buffer.from(user.fileList[filePath].fileKey,'hex');
             fileInfo.addressKey = Buffer.from(user.fileList[filePath].addressKey,'hex');
-            service.retrieve(fileInfo);
+            await service.retrieve(fileInfo);
             break;
         }
         case 'eval': {
